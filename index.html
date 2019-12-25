@@ -6,43 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     
-    <style>
-        body {
-            background-color: black;
-            color: white;
-        }
-
-        .imfo {
-            display: flex;
-            flex-flow: wrap;
-            justify-content: space-evenly;
-        }
-
-        .weather_card {
-            /* border: 1px solid white; */
-            margin: 30px;
-        }
-
-        .weather_card>h1 {
-            text-align: center;
-            padding-bottom: 10px;
-            border-bottom: 1px white solid;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="imfo">
-        <!-- <div class="weather_card">
-            <h1>地區:</h1>
-            <h2>開始時間:</h2>
-            <h2>溫度</h2>
-            <h2>天氣狀況:</h2>
+    <div class="row">
+        <!-- <div class="col-12 col-md-3">
+            <div class="content">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                    </div>
+                </div>
+            </div>
         </div> -->
     </div>
+    
 
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script>
@@ -58,16 +54,20 @@
         function ajax_success(weather_data) {
             weather_data.records.location.forEach(location => {
                 console.log(location);
-                var imfo = document.querySelector(".imfo");
-                imfo.innerHTML +=
-
-                    `<div class="weather_card">
-            <h1>${location.locationName}</h1>
-            <h2>開始時間: ${location.weatherElement[4].time[0].startTime}</h2>
-            <h2>最大溫度: ${location.weatherElement[4].time[0].parameter.parameterName}C</h2>
-            <h2>天氣狀況: ${location.weatherElement[0].time[0].parameter.parameterName}</h2>
-        </div>`
-        ;
+                var row = document.querySelector('.row');
+                row.innerHTML +=
+                    `<div class="col-12 col-md-4">
+                        <div class="content">
+                            <div class="card mx-auto mt-1" style="width: 60%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">${location.locationName}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">${location.weatherElement[4].time[0].startTime}</h6>
+                                    <p class="card-text">${location.weatherElement[4].time[0].parameter.parameterName}C</p>
+                                    <p class="card-text">${location.weatherElement[0].time[0].parameter.parameterName}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
             });
         }
     </script>
